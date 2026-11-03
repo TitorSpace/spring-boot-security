@@ -10,7 +10,9 @@ import spring_boot_web_jpa.product.application.command.update.UpdateProductReque
 import spring_boot_web_jpa.product.domain.entity.Product;
 import spring_boot_web_jpa.product.infrastructure.api.dto.CreateProductDto;
 import spring_boot_web_jpa.product.infrastructure.api.dto.ProductDto;
+import spring_boot_web_jpa.product.infrastructure.api.dto.ReviewDto;
 import spring_boot_web_jpa.product.infrastructure.api.dto.UpdateProductDto;
+import spring_boot_web_jpa.review.domain.Review;
 
 import java.util.List;
 
@@ -24,6 +26,9 @@ public interface ProductMapper {
 
     @Mapping(target = "provider", source = "productDetail.provider")
     ProductDto mapToProductDto(Product product);
+
+    @Mapping(target = "product", ignore = true)
+    Review mapToReview(ReviewDto reviewDto);
 
     default List<String> mapToCategoryNames(List<Category> categories) {
         return categories.stream().map(Category::getName).toList();

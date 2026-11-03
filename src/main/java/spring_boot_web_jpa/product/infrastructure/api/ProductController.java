@@ -1,6 +1,7 @@
 package spring_boot_web_jpa.product.infrastructure.api;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -110,7 +111,7 @@ public class ProductController implements ProductApi {
 
     @Operation(summary = "Update product", description = "Update product")
     @PutMapping("")
-    public ResponseEntity<Void> updateProduct(@ModelAttribute @Valid UpdateProductDto productDto) {
+    public ResponseEntity<Void> updateProduct(@RequestBody @Valid UpdateProductDto productDto) {
 
         log.info("Updating product with id {}", productDto.getId());
 

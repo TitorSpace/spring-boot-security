@@ -3,10 +3,14 @@ package spring_boot_web_jpa.product.application.command.update;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import spring_boot_web_jpa.category.domain.Category;
+import spring_boot_web_jpa.category.infrastructure.CategoryEntityMapper;
+import spring_boot_web_jpa.category.infrastructure.QueryCategoryRepository;
 import spring_boot_web_jpa.common.application.mediator.RequestHandler;
-import spring_boot_web_jpa.common.infrastructure.util.FileUtils;
 import spring_boot_web_jpa.product.domain.entity.Product;
+import spring_boot_web_jpa.product.domain.exception.ProductNotFoundException;
 import spring_boot_web_jpa.product.domain.port.ProductRepository;
+import spring_boot_web_jpa.productDetail.domain.ProductDetail;
 
 @Service
 @RequiredArgsConstructor
@@ -14,23 +18,25 @@ import spring_boot_web_jpa.product.domain.port.ProductRepository;
 public class UpdateProductHandler implements RequestHandler<UpdateProductRequest, Void> {
 
     private final ProductRepository productRepository;
-    private final FileUtils fileUtils;
+    private final QueryCategoryRepository queryCategoryRepository;
+    private final CategoryEntityMapper categoryEntityMapper;
 
     @Override
     public Void handle(UpdateProductRequest request) {
 
         log.info("Updating product with id {}", request.getId());
 
-        String uniqueFilename = fileUtils.saveProductImage(request.getFile());
+        Product product = productRepository.findById(request.getId()).orElseThrow(() -> new ProductNotFoundException(request.getId()));
 
-        Product product = Product.builder()
-                .id(request.getId())
-                .name(request.getName())
-                .description(request.getDescription())
-                .price(request.getPrice())
-                .image(uniqueFilename)
-                .build();
+        ProductDetail productDetail = product.getProductDetail();
+        productDetail.setProvider(request.getProvider());
+        product.getReviews().add(request.getReview());
 
+        Category category = queryCategoryRepository.findById(request.getCategoryId())
+                .map(categoryEntityMapper::maptoCategory)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        product.getCategories().add(category);
         productRepository.upsert(product);
 
         log.info("Updated product with id {}", request.getId());

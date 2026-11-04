@@ -1,5 +1,6 @@
 package spring_boot_web_jpa.product.application.command.update;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import spring_boot_web_jpa.productDetail.domain.ProductDetail;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(rollbackOn = Exception.class)
 public class UpdateProductHandler implements RequestHandler<UpdateProductRequest, Void> {
 
     private final ProductRepository productRepository;
@@ -39,6 +41,7 @@ public class UpdateProductHandler implements RequestHandler<UpdateProductRequest
         product.getCategories().add(category);
         productRepository.upsert(product);
 
+        if (product.getId() == 8) throw new RuntimeException("Error updating product with id 8");
         log.info("Updated product with id {}", request.getId());
 
         return null;

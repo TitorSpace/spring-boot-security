@@ -2,6 +2,7 @@ package spring_boot_web_jpa.category.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
+@Profile("!test & !prod")
 public class CategorySeeder implements CommandLineRunner {
 
     private final QueryCategoryRepository queryCategoryRepository;

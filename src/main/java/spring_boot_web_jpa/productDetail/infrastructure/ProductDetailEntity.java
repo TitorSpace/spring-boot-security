@@ -16,7 +16,7 @@ public class ProductDetailEntity {
     private String warranty;
     private String provider;
 
-    @OneToOne(mappedBy = "productDetailEntity")
+    @OneToOne(mappedBy = "productDetail")
     private ProductEntity productEntity;
 
 

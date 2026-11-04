@@ -27,7 +27,7 @@ public class ProductEntity {
     @JoinColumn(name = "product_detail_id")
     private ProductDetailEntity productDetail;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "productEntity", cascade = CascadeType.ALL)
     private List<ReviewEntity> reviews = new ArrayList<>();
 
     @ManyToMany

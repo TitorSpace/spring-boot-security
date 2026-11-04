@@ -8,10 +8,14 @@ import spring_boot_web_jpa.product.infrastructure.database.entity.ProductEntity;
 import spring_boot_web_jpa.review.domain.Review;
 import spring_boot_web_jpa.review.infrastructure.ReviewEntity;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, unmappedTargetPolicy = ReportingPolicy.ERROR)
+
+@Mapper(
+        componentModel = MappingConstants.ComponentModel.SPRING,
+        unmappedTargetPolicy = ReportingPolicy.ERROR
+)
 public interface ProductEntityMapper {
 
-    @Mapping(target = "productDetail.product", ignore = true)
+    @Mapping(target = "productDetail.productEntity", ignore = true)
     ProductEntity mapToProductEntity(Product product);
 
     @Mapping(target = "productDetail.product", ignore = true)
@@ -20,7 +24,7 @@ public interface ProductEntityMapper {
     @Mapping(target = "product", ignore = true)
     Review mapToReview(ReviewEntity reviewEntity);
 
-    @Mapping(target = "product", ignore = true)
+    @Mapping(target = "productEntity", ignore = true)
     ReviewEntity mapToReviewEntity(Review review);
 
     @Mapping(target = "products", ignore = true)
@@ -32,7 +36,9 @@ public interface ProductEntityMapper {
     @AfterMapping
     default void linkReviews(@MappingTarget ProductEntity productEntity) {
         if (productEntity.getReviews() != null) {
-            productEntity.getReviews().forEach(r -> r.setProductEntity(productEntity));
+            productEntity.getReviews().forEach(
+                    review -> review.setProductEntity(productEntity)
+            );
         }
     }
 }

@@ -1,11 +1,11 @@
-package spring_boot_web_jpa.product.infrastructure.api;
+package spring_boot_security.product.infrastructure.api;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import spring_boot_web_jpa.common.application.mediator.Mediator;
-import spring_boot_web_jpa.product.infrastructure.api.mapper.ProductMapper;
+import spring_boot_security.common.application.mediator.Mediator;
+import spring_boot_security.product.infrastructure.api.mapper.ProductMapper;
 
 @ExtendWith(MockitoExtension.class)
 class ProductControllerTest {

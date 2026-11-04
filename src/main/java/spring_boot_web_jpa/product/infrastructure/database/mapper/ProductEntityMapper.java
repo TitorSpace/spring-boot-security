@@ -1,9 +1,6 @@
 package spring_boot_web_jpa.product.infrastructure.database.mapper;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import spring_boot_web_jpa.category.domain.Category;
 import spring_boot_web_jpa.category.infrastructure.CategoryEntity;
 import spring_boot_web_jpa.product.domain.entity.Product;
@@ -31,4 +28,11 @@ public interface ProductEntityMapper {
 
     @Mapping(target = "products", ignore = true)
     CategoryEntity mapToCategoryEntity(Category category);
+
+    @AfterMapping
+    default void linkReviews(@MappingTarget ProductEntity productEntity) {
+        if (productEntity.getReviews() != null) {
+            productEntity.getReviews().forEach(r -> r.setProductEntity(productEntity));
+        }
+    }
 }

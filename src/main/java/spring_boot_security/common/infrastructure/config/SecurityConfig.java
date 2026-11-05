@@ -2,10 +2,10 @@ package spring_boot_security.common.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,11 +22,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) //petitions from other domains are not allowed
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/v1/products/**"
+                                "/api/v1/products/**",
+                                "/api/v1/users/login",
+                                "/api/v1/users/register"
                         ).permitAll()
                         .anyRequest().authenticated()//any other request needs to be authenticated
                 )
-                .httpBasic(Customizer.withDefaults())//establish the way that other requests have to authenticate
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }
 

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "SpringbootwebHexArch API",
+                title = "SpringbootSecurity API",
                 version = "${api.version}",
                 contact = @Contact(
                         name = "TitorSpace", email = "titorsjourney@outlook.com", url = "https://www.baeldung.com"

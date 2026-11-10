@@ -48,7 +48,5 @@ public class UserController {
 
         TokenResponseDto tokenResponseDto = userMapper.mapToTokenResponseDto(response);
         return ResponseEntity.ok(tokenResponseDto);
-
-        return ResponseEntity.ok(tokenResponseDto);
     }
 }

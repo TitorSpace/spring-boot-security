@@ -17,7 +17,8 @@ import java.util.function.Function;
 public class JwtService {
 
     private static final String SECRET_KEY = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
-    private static final long TOKEN_EXPIRATION = 1000 * 60 * 60 * 42;
+    private static final long REFRESH_WINDOW = 1000 * 60 * 60 * 42 * 7;
+    private static final long TOKEN_EXPIRATION = 1000;
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = Map.of("authorities", userDetails.getAuthorities().
@@ -68,7 +69,24 @@ public class JwtService {
         return getClaim(token, Claims::getSubject);
     }
 
-//    public String getAuthorities(String token) {
-//        return getClaim(token, Claims::getIssuer);
-//    }
+    public Date getExpiration(String token) {
+        return getClaim(token, Claims::getExpiration);
+    }
+
+    public boolean isTokenExpired(String token) {
+        return getExpiration(token).before(new Date());
+    }
+
+    public boolean canBeTokenRenewed(String token) {
+        return getExpiration(token).before(new Date(System.currentTimeMillis() + REFRESH_WINDOW));
+    }
+
+    public String renewToken(String token, UserDetails userDetails) {
+
+        if (!canBeTokenRenewed(token)) {
+            throw new RuntimeException("Token cannot be renewed.");
+        }
+        return generateToken(userDetails);
+    }
+
 }

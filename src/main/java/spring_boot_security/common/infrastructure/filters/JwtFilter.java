@@ -37,6 +37,17 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         String token = authorization.substring(7);// number 7 because it is like "Bearer 'token'"
+
+        boolean isTokenExpired = jwtService.isTokenExpired(token);
+
+        boolean canBeTokenRenewed = jwtService.canBeTokenRenewed(token);
+
+        if (isTokenExpired && !canBeTokenRenewed) {
+            log.error("Token is expired");
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String username = jwtService.getUsername(token);
 
         if (username == null || SecurityContextHolder.getContext().getAuthentication() != null) {
@@ -50,6 +61,11 @@ public class JwtFilter extends OncePerRequestFilter {
                 .password("password")
                 .roles("USER")
                 .build();
+
+        if (isTokenExpired && canBeTokenRenewed) {
+            String renewedToken = jwtService.renewToken(token, userDetails);
+            response.setHeader("Authorization", "Bearer " + renewedToken);
+        }
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 userDetails,

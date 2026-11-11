@@ -1,4 +1,4 @@
-package spring_boot_security.product.infrastructure.database.repository;
+package spring_boot_security.repository;
 
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.QueryHint;
@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
-import spring_boot_security.product.infrastructure.database.entity.ProductEntity;
+import spring_boot_security.entity.ProductEntity;
 
 import java.util.List;
 import java.util.Optional;

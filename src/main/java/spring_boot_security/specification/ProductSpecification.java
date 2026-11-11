@@ -1,7 +1,7 @@
-package spring_boot_security.product.infrastructure.database.specification;
+package spring_boot_security.specification;
 
 import org.springframework.data.jpa.domain.Specification;
-import spring_boot_security.product.infrastructure.database.entity.ProductEntity;
+import spring_boot_security.entity.ProductEntity;
 
 public class ProductSpecification {
 

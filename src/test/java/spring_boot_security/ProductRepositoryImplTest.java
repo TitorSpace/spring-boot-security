@@ -1,4 +1,4 @@
-package spring_boot_security.product.infrastructure.database;
+package spring_boot_security;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -6,10 +6,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import spring_boot_security.entity.ProductEntity;
+import spring_boot_security.mapper.ProductEntityMapper;
 import spring_boot_security.product.domain.entity.Product;
-import spring_boot_security.product.infrastructure.database.entity.ProductEntity;
-import spring_boot_security.product.infrastructure.database.mapper.ProductEntityMapper;
-import spring_boot_security.product.infrastructure.database.repository.QueryProductRepository;
+import spring_boot_security.repository.QueryProductRepository;
 
 import java.util.Optional;
 

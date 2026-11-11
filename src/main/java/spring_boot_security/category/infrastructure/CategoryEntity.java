@@ -2,7 +2,7 @@ package spring_boot_security.category.infrastructure;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import spring_boot_security.product.infrastructure.database.entity.ProductEntity;
+import spring_boot_security.entity.ProductEntity;
 
 import java.util.List;
 

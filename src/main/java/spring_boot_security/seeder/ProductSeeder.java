@@ -1,4 +1,4 @@
-package spring_boot_security.product.infrastructure.database.seeder;
+package spring_boot_security.seeder;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
-import spring_boot_security.product.infrastructure.database.entity.ProductEntity;
-import spring_boot_security.product.infrastructure.database.repository.QueryProductRepository;
+import spring_boot_security.entity.ProductEntity;
+import spring_boot_security.repository.QueryProductRepository;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
 

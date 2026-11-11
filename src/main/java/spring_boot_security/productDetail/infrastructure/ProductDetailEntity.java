@@ -2,7 +2,7 @@ package spring_boot_security.productDetail.infrastructure;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import spring_boot_security.product.infrastructure.database.entity.ProductEntity;
+import spring_boot_security.entity.ProductEntity;
 
 @Data
 @Entity

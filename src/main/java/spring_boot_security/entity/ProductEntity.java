@@ -1,4 +1,4 @@
-package spring_boot_security.product.infrastructure.database.entity;
+package spring_boot_security.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

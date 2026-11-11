@@ -19,6 +19,7 @@
 //import static org.junit.jupiter.api.Assertions.assertNotNull;
 //import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+//import org.mapstruct.Qualifier;
 //
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 //@Slf4j
@@ -26,8 +27,9 @@
 //public class ProductIT {
 //
 //    @Autowired
+//    @Qualifier("restTemplate")
 //    private TestRestTemplate restTemplate;
-//
+
 //    @Autowired
 //    private MockMvc mockMvc;
 //

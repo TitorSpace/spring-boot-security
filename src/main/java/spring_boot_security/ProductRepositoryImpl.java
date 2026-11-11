@@ -1,4 +1,4 @@
-package spring_boot_security.product.infrastructure.database;
+package spring_boot_security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,13 +11,13 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 import spring_boot_security.common.domain.PaginationQuery;
 import spring_boot_security.common.domain.PaginationResult;
+import spring_boot_security.entity.ProductEntity;
+import spring_boot_security.mapper.ProductEntityMapper;
 import spring_boot_security.product.domain.entity.Product;
 import spring_boot_security.product.domain.entity.ProductFilter;
 import spring_boot_security.product.domain.port.ProductRepository;
-import spring_boot_security.product.infrastructure.database.entity.ProductEntity;
-import spring_boot_security.product.infrastructure.database.mapper.ProductEntityMapper;
-import spring_boot_security.product.infrastructure.database.repository.QueryProductRepository;
-import spring_boot_security.product.infrastructure.database.specification.ProductSpecification;
+import spring_boot_security.repository.QueryProductRepository;
+import spring_boot_security.specification.ProductSpecification;
 
 import java.util.Optional;
 

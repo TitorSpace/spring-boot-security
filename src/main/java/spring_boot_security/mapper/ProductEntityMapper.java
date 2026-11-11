@@ -1,10 +1,10 @@
-package spring_boot_security.product.infrastructure.database.mapper;
+package spring_boot_security.mapper;
 
 import org.mapstruct.*;
 import spring_boot_security.category.domain.Category;
 import spring_boot_security.category.infrastructure.CategoryEntity;
+import spring_boot_security.entity.ProductEntity;
 import spring_boot_security.product.domain.entity.Product;
-import spring_boot_security.product.infrastructure.database.entity.ProductEntity;
 import spring_boot_security.review.domain.Review;
 import spring_boot_security.review.infrastructure.ReviewEntity;
 

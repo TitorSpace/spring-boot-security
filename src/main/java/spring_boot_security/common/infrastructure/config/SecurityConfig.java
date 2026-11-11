@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -14,6 +15,7 @@ import spring_boot_security.common.infrastructure.filters.JwtFilter;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -25,12 +27,13 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable) //petitions from other domains are not allowed
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/v1/products/**",
-                                "/api/v1/users/login",
-                                "/api/v1/users/register"
-                        ).permitAll()
-                        .anyRequest().authenticated()//any other request needs to be authenticated
+                                .requestMatchers(
+//                                "/api/v1/products/**",
+                                        "/api/v1/users/login",
+                                        "/api/v1/users/register"
+                                ).permitAll()
+                                .requestMatchers("/actuator/**").hasAuthority("ADMIN")
+                                .anyRequest().authenticated()//any other request needs to be authenticated
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

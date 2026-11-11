@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import spring_boot_security.common.application.mediator.Mediator;
 import spring_boot_security.common.domain.PaginationQuery;
@@ -79,6 +80,7 @@ public class ProductController implements ProductApi {
 
     @Operation(summary = "Get product by id", description = "Get product by id")
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
 
         log.info("Getting product with id {}", id);

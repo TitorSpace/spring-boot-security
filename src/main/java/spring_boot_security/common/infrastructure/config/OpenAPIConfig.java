@@ -1,15 +1,18 @@
 package spring_boot_security.common.infrastructure.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.context.annotation.Configuration;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "SpringbootwebHexArch API",
+                title = "SpringbootSecurity API",
                 version = "${api.version}",
                 contact = @Contact(
                         name = "TitorSpace", email = "titorsjourney@outlook.com", url = "https://www.baeldung.com"
@@ -24,6 +27,13 @@ import org.springframework.context.annotation.Configuration;
                 url = "${api.server.url}",
                 description = "Production"
         )
+)
+@SecurityScheme(
+        name = "Bearer Authentication",
+        description = "Authentication with JWT",
+        bearerFormat = "bearer",
+        in = SecuritySchemeIn.HEADER,
+        type = SecuritySchemeType.HTTP
 )
 @Configuration
 public class OpenAPIConfig {

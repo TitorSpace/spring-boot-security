@@ -1,7 +1,9 @@
 package spring_boot_security.common.infrastructure.exceptions;
 
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +33,17 @@ public class ApiExceptionHandler {
     @ExceptionHandler(ProductNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorMessage notFound(HttpServletRequest request, Exception exception) {
+
+        return new ErrorMessage(exception.getMessage(), exception.getClass().getSimpleName(), request.getRequestURI());
+    }
+
+    @ResponseBody
+    @ExceptionHandler({
+            JwtException.class,
+            AuthenticationException.class
+    })
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public ErrorMessage forbidden(HttpServletRequest request, Exception exception) {
 
         return new ErrorMessage(exception.getMessage(), exception.getClass().getSimpleName(), request.getRequestURI());
     }

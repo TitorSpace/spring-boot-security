@@ -2,11 +2,13 @@ package spring_boot_security.product.infrastructure.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import spring_boot_security.common.application.mediator.Mediator;
 import spring_boot_security.common.domain.PaginationQuery;
@@ -32,6 +34,7 @@ import java.net.URI;
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
 @Tag(name = "Product", description = "Product API operations")
+@SecurityRequirement(name = "Bearer Authentication")
 @Slf4j
 public class ProductController implements ProductApi {
 
@@ -79,6 +82,7 @@ public class ProductController implements ProductApi {
 
     @Operation(summary = "Get product by id", description = "Get product by id")
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
 
         log.info("Getting product with id {}", id);

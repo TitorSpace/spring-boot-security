@@ -1,10 +1,4 @@
-package spring_boot_security.IT.config;
-
-import lombok.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import java.time.Duration;
+//package spring_boot_security.IT.config;
 
 //@Configuration
 //public class RestConfig {
@@ -20,4 +14,4 @@ import java.time.Duration;
 //                .rootUri("http://localhost:8080")
 //        );
 //    }
-}
+//}

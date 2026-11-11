@@ -2,6 +2,7 @@ package spring_boot_security.product.infrastructure.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,7 @@ import java.net.URI;
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
 @Tag(name = "Product", description = "Product API operations")
+@SecurityRequirement(name = "Bearer Authentication")
 @Slf4j
 public class ProductController implements ProductApi {
 
